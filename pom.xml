@@ -135,7 +135,7 @@
     <repository>
       <id>onarandombox-repo</id>
       <name>Multiverse repository</name>
-      <url>http://repo.onarandombox.com/content/repositories/multiverse/</url>
+      <url>https://repo.onarandombox.com/multiverse-snapshots/</url>
     </repository>
     <repository>
       <id>codemc-repo</id>
@@ -145,7 +145,7 @@
     <repository>
       <id>weaondara-repo</id>
       <name>wea_ondara's Repository</name>
-      <url>http://repo.wea-ondara.net/repository/public/</url>
+      <url>https://repo.wea-ondara.net/repository/public/</url>
     </repository>
     <repository>
       <id>md5-repo</id>
@@ -208,10 +208,10 @@
       </exclusions>
     </dependency>
     <dependency>
-      <groupId>com.onarandombox.multiversecore</groupId>
-      <artifactId>Multiverse-Core</artifactId>
-      <version>4.1.0</version>
+      <groupId>org.mvplugins.multiverse.core</groupId>
+      <artifactId>multiverse-core</artifactId>
       <optional>true</optional>
+      <version>5.0.0-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
