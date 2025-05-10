@@ -5,33 +5,28 @@
  */
 package com.github.ucchyocean.lc3.bridge;
 
-import net.milkbowl.vault.chat.Chat;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
+import net.milkbowl.vault.chat.Chat;
+
 /**
  * Vault-Chat連携クラス
- *
  * @author ucchy
  */
 public class VaultChatBridge {
 
-    /**
-     * vault-chatクラス
-     */
+    /** vault-chatクラス */
     private Chat chatPlugin;
 
-    /**
-     * コンストラクタは使用不可
-     */
+    /** コンストラクタは使用不可 */
     private VaultChatBridge() {
     }
 
     /**
      * vault-chatをロードする
-     *
      * @param plugin vaultのプラグインインスタンス
      * @return ロードしたブリッジのインスタンス
      */
@@ -39,7 +34,7 @@ public class VaultChatBridge {
 
         RegisteredServiceProvider<Chat> chatProvider =
                 Bukkit.getServicesManager().getRegistration(Chat.class);
-        if (chatProvider != null) {
+        if ( chatProvider != null ) {
             VaultChatBridge bridge = new VaultChatBridge();
             bridge.chatPlugin = chatProvider.getProvider();
             return bridge;
@@ -50,7 +45,6 @@ public class VaultChatBridge {
 
     /**
      * プレイヤーのprefixを取得します。
-     *
      * @param player プレイヤー
      * @return プレイヤーのprefix
      */
@@ -61,7 +55,6 @@ public class VaultChatBridge {
 
     /**
      * プレイヤーのsuffixを取得します。
-     *
      * @param player プレイヤー
      * @return プレイヤーのsuffix
      */

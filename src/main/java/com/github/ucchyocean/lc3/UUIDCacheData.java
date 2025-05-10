@@ -5,15 +5,15 @@
  */
 package com.github.ucchyocean.lc3;
 
-import com.github.ucchyocean.lc3.util.YamlConfig;
-import org.jetbrains.annotations.Nullable;
-
 import java.io.File;
 import java.io.IOException;
 
+import org.jetbrains.annotations.Nullable;
+
+import com.github.ucchyocean.lc3.util.YamlConfig;
+
 /**
  * UUIDのキャッシュデータを管理するクラス
- *
  * @author ucchy
  */
 public class UUIDCacheData {
@@ -23,11 +23,10 @@ public class UUIDCacheData {
     // キャッシュデータ key=UUID文字列、value=プレイヤー名
     private YamlConfig cache;
 
-    private final File dataFolder;
+    private File dataFolder;
 
     /**
      * コンストラクタ
-     *
      * @param dataFolder プラグインのデータ格納フォルダ
      */
     public UUIDCacheData(File dataFolder) {
@@ -41,7 +40,7 @@ public class UUIDCacheData {
      */
     public void reload() {
         File file = new File(dataFolder, FILE_NAME);
-        if (!file.exists()) {
+        if ( !file.exists() ) {
             // キャッシュファイルがまだ無いなら、からファイルを作成しておく。
             cache = new YamlConfig();
             try {
@@ -68,7 +67,6 @@ public class UUIDCacheData {
 
     /**
      * プレイヤーのUUIDとプレイヤー名を追加する。
-     *
      * @param uuid UUID
      * @param name プレイヤー名
      */
@@ -78,7 +76,6 @@ public class UUIDCacheData {
 
     /**
      * プレイヤーのUUIDからプレイヤー名を取得する。
-     *
      * @param uuid UUID
      * @return プレイヤー名（キャッシュされていない場合はnullが返される）
      */
@@ -88,15 +85,14 @@ public class UUIDCacheData {
 
     /**
      * プレイヤー名からUUIDを取得する
-     *
      * @param name プレイヤー名
      * @return UUID（キャッシュされていない場合はnullが返される）
      */
     public @Nullable String getUUIDFromName(String name) {
-        if (name == null) return null;
-        for (String uuid : cache.getKeys(false)) {
+        if ( name == null ) return null;
+        for ( String uuid : cache.getKeys(false) ) {
             String n = cache.getString(uuid);
-            if (name.equalsIgnoreCase(n)) {
+            if ( name.equalsIgnoreCase(n) ) {
                 return uuid;
             }
         }

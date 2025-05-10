@@ -5,16 +5,16 @@
  */
 package com.github.ucchyocean.lc3.member;
 
-import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
+import net.md_5.bungee.api.chat.BaseComponent;
+
 /**
  * ChannelMemberのBukkit-ConsoleCommandSender実装
- *
  * @author ucchy
  */
 public class ChannelMemberBukkitConsole extends ChannelMemberBukkit {
@@ -23,7 +23,6 @@ public class ChannelMemberBukkitConsole extends ChannelMemberBukkit {
 
     /**
      * コンストラクタ
-     *
      * @param sender コンソール
      */
     public ChannelMemberBukkitConsole(ConsoleCommandSender sender) {
@@ -32,7 +31,6 @@ public class ChannelMemberBukkitConsole extends ChannelMemberBukkit {
 
     /**
      * オンラインかどうか
-     *
      * @return 常にtrue
      * @see com.github.ucchyocean.lc.channel.ChannelPlayer#isOnline()
      */
@@ -43,7 +41,6 @@ public class ChannelMemberBukkitConsole extends ChannelMemberBukkit {
 
     /**
      * プレイヤー名を返す
-     *
      * @return プレイヤー名
      * @see com.github.ucchyocean.lc.channel.ChannelPlayer#getName()
      */
@@ -54,7 +51,6 @@ public class ChannelMemberBukkitConsole extends ChannelMemberBukkit {
 
     /**
      * プレイヤー表示名を返す
-     *
      * @return プレイヤー表示名
      * @see com.github.ucchyocean.lc.channel.ChannelPlayer#getDisplayName()
      */
@@ -65,7 +61,6 @@ public class ChannelMemberBukkitConsole extends ChannelMemberBukkit {
 
     /**
      * プレフィックスを返す
-     *
      * @return 常に空文字列
      * @see com.github.ucchyocean.lc.channel.ChannelPlayer#getPrefix()
      */
@@ -76,7 +71,6 @@ public class ChannelMemberBukkitConsole extends ChannelMemberBukkit {
 
     /**
      * サフィックスを返す
-     *
      * @return 常に空文字列
      * @see com.github.ucchyocean.lc.channel.ChannelPlayer#getSuffix()
      */
@@ -87,30 +81,27 @@ public class ChannelMemberBukkitConsole extends ChannelMemberBukkit {
 
     /**
      * メッセージを送る
-     *
      * @param message 送信するメッセージ
      * @see com.github.ucchyocean.lc.channel.ChannelPlayer#sendMessage(java.lang.String)
      */
     @Override
     public void sendMessage(String message) {
-        if (message == null || message.isEmpty()) return;
+        if ( message == null || message.isEmpty() ) return;
         sender.sendMessage(message);
     }
 
     /**
      * メッセージを送る
-     *
      * @param message 送るメッセージ
      * @see com.github.ucchyocean.lc3.member.ChannelMember#sendMessage(net.md_5.bungee.api.chat.BaseComponent[])
      */
     public void sendMessage(BaseComponent[] message) {
-        if (message == null || message.length == 0) return;
+        if ( message == null || message.length == 0 ) return;
         sender.spigot().sendMessage(message);
     }
 
     /**
      * BukkitのPlayerを取得する
-     *
      * @return 常にnullが返される
      * @see com.github.ucchyocean.lc.channel.ChannelPlayer#getPlayer()
      */
@@ -121,7 +112,6 @@ public class ChannelMemberBukkitConsole extends ChannelMemberBukkit {
 
     /**
      * 発言者が今いるワールドのワールド名を取得する
-     *
      * @return 常に "-" が返される。
      * @see com.github.ucchyocean.lc.channel.ChannelPlayer#getWorldName()
      */
@@ -132,7 +122,6 @@ public class ChannelMemberBukkitConsole extends ChannelMemberBukkit {
 
     /**
      * 発言者が今いる位置を取得する
-     *
      * @return 常にnullが返される
      * @see com.github.ucchyocean.lc.channel.ChannelPlayer#getLocation()
      */
@@ -143,7 +132,6 @@ public class ChannelMemberBukkitConsole extends ChannelMemberBukkit {
 
     /**
      * 指定されたパーミッションノードの権限を持っているかどうかを取得する
-     *
      * @param node パーミッションノード
      * @return 権限を持っているかどうか
      * @see com.github.ucchyocean.lc.channel.ChannelPlayer#hasPermission(java.lang.String)
@@ -155,7 +143,6 @@ public class ChannelMemberBukkitConsole extends ChannelMemberBukkit {
 
     /**
      * 指定されたパーミッションノードが定義されているかどうかを取得する
-     *
      * @param node パーミッションノード
      * @return 定義を持っているかどうか
      * @see com.github.ucchyocean.lc.channel.ChannelPlayer#isPermissionSet(java.lang.String)
@@ -167,7 +154,6 @@ public class ChannelMemberBukkitConsole extends ChannelMemberBukkit {
 
     /**
      * 指定されたメッセージの内容を発言する
-     *
      * @param message メッセージ
      * @see com.github.ucchyocean.lc3.member.ChannelMember#chat(java.lang.String)
      */
@@ -177,7 +163,6 @@ public class ChannelMemberBukkitConsole extends ChannelMemberBukkit {
 
     /**
      * IDを返す
-     *
      * @return 名前をそのまま返す
      * @see com.github.ucchyocean.lc.channel.ChannelPlayer#getID()
      */

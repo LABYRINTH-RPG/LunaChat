@@ -12,7 +12,6 @@ import com.github.ucchyocean.lc3.util.Utility;
 
 /**
  * unhideコマンドの実行クラス
- *
  * @author ucchy
  */
 public class UnhideCommand extends LunaChatSubCommand {
@@ -22,7 +21,6 @@ public class UnhideCommand extends LunaChatSubCommand {
 
     /**
      * コマンドを取得します。
-     *
      * @return コマンド
      * @see com.github.ucchyocean.lc3.command.LunaChatSubCommand#getCommandName()
      */
@@ -33,7 +31,6 @@ public class UnhideCommand extends LunaChatSubCommand {
 
     /**
      * パーミッションノードを取得します。
-     *
      * @return パーミッションノード
      * @see com.github.ucchyocean.lc3.command.LunaChatSubCommand#getPermissionNode()
      */
@@ -44,7 +41,6 @@ public class UnhideCommand extends LunaChatSubCommand {
 
     /**
      * コマンドの種別を取得します。
-     *
      * @return コマンド種別
      * @see com.github.ucchyocean.lc3.command.LunaChatSubCommand#getCommandType()
      */
@@ -55,9 +51,8 @@ public class UnhideCommand extends LunaChatSubCommand {
 
     /**
      * 使用方法に関するメッセージをsenderに送信します。
-     *
      * @param sender コマンド実行者
-     * @param label  実行ラベル
+     * @param label 実行ラベル
      * @see com.github.ucchyocean.lc3.command.LunaChatSubCommand#sendUsageMessage()
      */
     @Override
@@ -69,10 +64,9 @@ public class UnhideCommand extends LunaChatSubCommand {
 
     /**
      * コマンドを実行します。
-     *
      * @param sender コマンド実行者
-     * @param label  実行ラベル
-     * @param args   実行時の引数
+     * @param label 実行ラベル
+     * @param args 実行時の引数
      * @return コマンドが実行されたかどうか
      * @see com.github.ucchyocean.lc3.command.LunaChatSubCommand#runCommand(java.lang.String[])
      */
@@ -84,19 +78,19 @@ public class UnhideCommand extends LunaChatSubCommand {
         String cname = null;
         boolean isPlayerCommand = false;
         boolean isChannelCommand = false;
-        if (args.length <= 1) {
+        if ( args.length <= 1 ) {
             Channel def = api.getDefaultChannel(sender.getName());
-            if (def != null) {
+            if ( def != null ) {
                 cname = def.getName();
             }
-        } else if (args.length >= 2) {
-            if (args.length >= 3 && args[1].equalsIgnoreCase("player")) {
+        } else if ( args.length >= 2 ) {
+            if ( args.length >= 3 && args[1].equalsIgnoreCase("player") ) {
                 // 指定されたコマンドが「/ch unhide player (player名)」なら、対象をプレイヤーとする。
                 isPlayerCommand = true;
                 isChannelCommand = false;
                 cname = args[2];
 
-            } else if (args.length >= 3 && args[1].equalsIgnoreCase("channel")) {
+            } else if ( args.length >= 3 && args[1].equalsIgnoreCase("channel") ) {
                 // 指定されたコマンドが「/ch unhide channel (channel名)」なら、対象をチャンネルとする。
                 isPlayerCommand = false;
                 isChannelCommand = true;
@@ -110,18 +104,18 @@ public class UnhideCommand extends LunaChatSubCommand {
 
         // チャンネルかプレイヤーが存在するかどうかをチェックする
         Channel channel = api.getChannel(cname);
-        if (!isPlayerCommand && channel != null) {
+        if ( !isPlayerCommand && channel != null ) {
             isChannelCommand = true;
-        } else if (!Utility.existsOfflinePlayer(cname)) {
+        } else if ( !Utility.existsOfflinePlayer(cname) ) {
             sender.sendMessage(Messages.errmsgNotExistChannelAndPlayer());
             return true;
         }
 
-        if (isChannelCommand) {
+        if ( isChannelCommand ) {
             // チャンネルが対象の場合の処理
 
             // 非表示になっているかどうかをチェックする
-            if (!channel.getHided().contains(sender)) {
+            if ( !channel.getHided().contains(sender) ) {
                 sender.sendMessage(Messages.errmsgAlreadyUnhided());
                 return true;
             }
@@ -138,7 +132,7 @@ public class UnhideCommand extends LunaChatSubCommand {
 
             // 既に表示になっていないかどうかをチェックする
             ChannelMember hided = ChannelMember.getChannelMember(cname);
-            if (!api.getHidelist(hided).contains(sender)) {
+            if ( !api.getHidelist(hided).contains(sender) ) {
                 sender.sendMessage(Messages.errmsgAlreadyUnhidedPlayer());
                 return true;
             }

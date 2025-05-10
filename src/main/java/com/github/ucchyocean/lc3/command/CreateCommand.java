@@ -11,7 +11,6 @@ import com.github.ucchyocean.lc3.member.ChannelMember;
 
 /**
  * createコマンドの実行クラス
- *
  * @author ucchy
  */
 public class CreateCommand extends LunaChatSubCommand {
@@ -21,7 +20,6 @@ public class CreateCommand extends LunaChatSubCommand {
 
     /**
      * コマンドを取得します。
-     *
      * @return コマンド
      * @see com.github.ucchyocean.lc3.command.LunaChatSubCommand#getCommandName()
      */
@@ -32,7 +30,6 @@ public class CreateCommand extends LunaChatSubCommand {
 
     /**
      * パーミッションノードを取得します。
-     *
      * @return パーミッションノード
      * @see com.github.ucchyocean.lc3.command.LunaChatSubCommand#getPermissionNode()
      */
@@ -43,7 +40,6 @@ public class CreateCommand extends LunaChatSubCommand {
 
     /**
      * コマンドの種別を取得します。
-     *
      * @return コマンド種別
      * @see com.github.ucchyocean.lc3.command.LunaChatSubCommand#getCommandType()
      */
@@ -54,9 +50,8 @@ public class CreateCommand extends LunaChatSubCommand {
 
     /**
      * 使用方法に関するメッセージをsenderに送信します。
-     *
      * @param sender コマンド実行者
-     * @param label  実行ラベル
+     * @param label 実行ラベル
      * @see com.github.ucchyocean.lc3.command.LunaChatSubCommand#sendUsageMessage()
      */
     @Override
@@ -67,10 +62,9 @@ public class CreateCommand extends LunaChatSubCommand {
 
     /**
      * コマンドを実行します。
-     *
      * @param sender コマンド実行者
-     * @param label  実行ラベル
-     * @param args   実行時の引数
+     * @param label 実行ラベル
+     * @param args 実行時の引数
      * @return コマンドが実行されたかどうか
      * @see com.github.ucchyocean.lc3.command.LunaChatSubCommand#runCommand(java.lang.String[])
      */
@@ -93,26 +87,26 @@ public class CreateCommand extends LunaChatSubCommand {
 
         // チャンネルが存在するかどうかをチェックする
         Channel other = api.getChannel(name);
-        if (other != null) {
+        if ( other != null ) {
             sender.sendMessage(Messages.errmsgExist());
             return true;
         }
 
         // 使用可能なチャンネル名かどうかをチェックする
-        if (!name.matches("[0-9a-zA-Z\\-_]+")) {
+        if ( !name.matches("[0-9a-zA-Z\\-_]+") ) {
             sender.sendMessage(Messages.errmsgCannotUseForChannel(name));
             return true;
         }
 
         // 最低文字列長を上回っているかをチェックする
-        if (name.length() < config.getMinChannelNameLength()) {
+        if ( name.length() < config.getMinChannelNameLength() ) {
             sender.sendMessage(Messages.errmsgCannotUseForChannelTooShort(
                     name, config.getMinChannelNameLength()));
             return true;
         }
 
         // 最大文字列長を下回っているかをチェックする
-        if (name.length() > config.getMaxChannelNameLength()) {
+        if ( name.length() > config.getMaxChannelNameLength() ) {
             sender.sendMessage(Messages.errmsgCannotUseForChannelTooLong(
                     name, config.getMaxChannelNameLength()));
             return true;
@@ -120,7 +114,7 @@ public class CreateCommand extends LunaChatSubCommand {
 
         // チャンネル作成
         Channel channel = api.createChannel(name, sender);
-        if (channel != null) {
+        if ( channel != null ) {
             channel.setDescription(desc);
             channel.save();
             sender.sendMessage(Messages.cmdmsgCreate(name));

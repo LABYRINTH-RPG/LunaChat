@@ -5,18 +5,21 @@
  */
 package com.github.ucchyocean.lc3.tool;
 
-import com.github.ucchyocean.lc3.util.YamlConfig;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.github.ucchyocean.lc3.util.YamlConfig;
+
 /**
  * messages_ja.yml を読んで、Messagesクラス用のメソッドを生成するツール
- *
  * @author ucchy
  */
 public class MessageParser {
@@ -28,14 +31,15 @@ public class MessageParser {
     private static final String END_MARKER = "    // === Auto-generated methods area end. ===";
 
     private static final List<String> CLICKABLE_MESSAGES;
-
     static {
         CLICKABLE_MESSAGES = new ArrayList<>();
-        Collections.addAll(CLICKABLE_MESSAGES, new String[]{
+        for ( String s : new String[] {
                 "joinMessage", "quitMessage", "banMessage", "kickMessage",
                 "muteMessage", "banNGWordMessage", "kickNGWordMessage", "muteNGWordMessage", "banWithExpireMessage",
                 "muteWithExpireMessage", "pardonMessage", "unmuteMessage", "expiredBanMessage", "expiredMuteMessage",
-                "addModeratorMessage", "removeModeratorMessage", "noRecipientMessage", "listFormat",});
+                "addModeratorMessage", "removeModeratorMessage", "noRecipientMessage", "listFormat", } ) {
+            CLICKABLE_MESSAGES.add(s);
+        }
     }
 
     public static void main(String[] args) {
@@ -50,10 +54,10 @@ public class MessageParser {
         // START_MARKERが出てくるまで読み進める
         List<String> result = new ArrayList<>();
         int index = 0;
-        while (!contents.get(index).equals(START_MARKER)) {
+        while ( !contents.get(index).equals(START_MARKER) ) {
             result.add(contents.get(index));
             index++;
-            if (contents.size() <= index) {
+            if ( contents.size() <= index ) {
                 System.err.println("ERROR! : START_MARKER not found.");
                 return;
             }
@@ -65,16 +69,16 @@ public class MessageParser {
         result.addAll(methods);
 
         // END_MARKERが出てくるまで読み捨てる
-        while (!contents.get(index).equals(END_MARKER)) {
+        while ( !contents.get(index).equals(END_MARKER) ) {
             index++;
-            if (contents.size() <= index) {
+            if ( contents.size() <= index ) {
                 System.err.println("ERROR! : END_MARKER not found.");
                 return;
             }
         }
 
         // 残りをそのまま読み込む
-        while (contents.size() > index) {
+        while ( contents.size() > index ) {
             result.add(contents.get(index));
             index++;
         }
@@ -88,7 +92,7 @@ public class MessageParser {
         List<String> result = new ArrayList<>();
 
         YamlConfig yaml = YamlConfig.load(new File(INPUT_FILE_PATH));
-        for (String key : yaml.getKeys(false)) {
+        for ( String key : yaml.getKeys(false) ) {
             String value = yaml.getString(key);
 
             ArrayList<String> keywords = new ArrayList<>();
@@ -96,18 +100,18 @@ public class MessageParser {
             Pattern pattern = Pattern.compile("%([^%]*)%");
             Matcher matcher = pattern.matcher(value);
 
-            while (matcher.find()) {
+            while ( matcher.find() ) {
                 keywords.add(matcher.group(1));
             }
 
             String arguments = "";
-            for (String keyword : keywords) {
-                if (arguments.length() > 0) arguments += ", ";
+            for ( String keyword : keywords ) {
+                if ( arguments.length() > 0 ) arguments += ", ";
                 arguments += "Object " + keyword;
             }
 
             // 出力
-            if (!CLICKABLE_MESSAGES.contains(key)) {
+            if ( !CLICKABLE_MESSAGES.contains(key) ) {
                 result.add("");
                 result.add("    /**");
                 result.add("     * " + value);
@@ -120,13 +124,13 @@ public class MessageParser {
                         "        if ( msg == null ) return \"\";", key));
                 result.add("        KeywordReplacer kr = new KeywordReplacer(msg);");
 
-                for (String keyword : keywords) {
+                for ( String keyword : keywords ) {
                     result.add(String.format(
                             "        kr.replace(\"%%%s%%\", %s.toString());", keyword, keyword));
                 }
-                if (key.startsWith("errmsg")) {
+                if ( key.startsWith("errmsg") ) {
                     result.add("        return Utility.replaceColorCode(resources.getString(\"errorPrefix\", \"\") + kr.toString());");
-                } else if (key.startsWith("cmdmsg")) {
+                } else if ( key.startsWith("cmdmsg") ) {
                     result.add("        return Utility.replaceColorCode(resources.getString(\"infoPrefix\", \"\") + kr.toString());");
                 } else {
                     result.add("        return Utility.replaceColorCode(kr.toString());");
@@ -145,8 +149,8 @@ public class MessageParser {
                         "        if ( msg == null ) return new BaseComponent[0];", key));
                 result.add("        ClickableFormat cf = ClickableFormat.makeChannelClickableMessage(msg, channel.toString());");
 
-                for (String keyword : keywords) {
-                    if (keyword.equals("%channel%")) continue;
+                for ( String keyword : keywords ) {
+                    if ( keyword.equals("%channel%") ) continue;
                     result.add(String.format(
                             "        cf.replace(\"%%%s%%\", %s.toString());", keyword, keyword));
                 }
@@ -161,9 +165,9 @@ public class MessageParser {
 
     private static List<String> readAllLines(File file) {
         List<String> lines = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+        try ( BufferedReader reader = new BufferedReader(new FileReader(file)) ) {
             String line;
-            while ((line = reader.readLine()) != null) {
+            while ( (line = reader.readLine()) != null ) {
                 lines.add(line);
             }
         } catch (IOException e) {
@@ -173,8 +177,8 @@ public class MessageParser {
     }
 
     private static void writeAllLines(File file, List<String> lines) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            for (String line : lines) {
+        try ( BufferedWriter writer = new BufferedWriter(new FileWriter(file)) ) {
+            for ( String line : lines ) {
                 writer.write(line);
                 writer.newLine();
             }

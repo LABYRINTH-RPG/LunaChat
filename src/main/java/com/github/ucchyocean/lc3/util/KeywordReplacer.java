@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 
 /**
  * 文字列のキーワード置き換えを行うユーティリティクラス
- *
  * @author ucchy
  */
 public class KeywordReplacer {
@@ -18,7 +17,6 @@ public class KeywordReplacer {
 
     /**
      * 指定された文字列で初期化を行う
-     *
      * @param src
      */
     public KeywordReplacer(String src) {
@@ -27,13 +25,12 @@ public class KeywordReplacer {
 
     /**
      * 文字列keywordを、文字列valueに置き換える
-     *
      * @param keyword キーワード
-     * @param value   値
+     * @param value 値
      */
     public void replace(String keyword, String value) {
         int index = 0;
-        while ((index = str.indexOf(keyword, index)) > -1) {
+        while ( (index = str.indexOf(keyword, index)) > -1 ) {
             str.replace(index, index + keyword.length(), value);
             index += value.length();
         }
@@ -41,7 +38,6 @@ public class KeywordReplacer {
 
     /**
      * 正規表現regexに一致する箇所を、文字列valueに置き換える
-     *
      * @param regex 正規表現
      * @param value 値
      */
@@ -58,7 +54,6 @@ public class KeywordReplacer {
 
     /**
      * 指定された文字列が含まれているかどうかを判定する
-     *
      * @param keyword キーワード
      * @return 含まれているかどうか
      */
@@ -68,7 +63,6 @@ public class KeywordReplacer {
 
     /**
      * 文字列をStringで取得する
-     *
      * @return String
      * @see java.lang.Object#toString()
      */
@@ -79,7 +73,6 @@ public class KeywordReplacer {
 
     /**
      * 文字列をStringBuilderのまま取得する
-     *
      * @return StringBuilder
      */
     public StringBuilder getStringBuilder() {

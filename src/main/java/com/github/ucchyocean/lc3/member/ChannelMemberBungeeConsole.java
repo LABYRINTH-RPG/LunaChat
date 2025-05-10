@@ -14,16 +14,14 @@ import net.md_5.bungee.api.connection.Server;
 
 /**
  * ChannelMemberのBungee-ConsoleCommandSender実装
- *
  * @author ucchy
  */
 public class ChannelMemberBungeeConsole extends ChannelMemberBungee {
 
-    private final CommandSender sender;
+    private CommandSender sender;
 
     /**
      * コンストラクタ
-     *
      * @param sender ConsoleのCommandSender
      */
     public ChannelMemberBungeeConsole(CommandSender sender) {
@@ -32,7 +30,6 @@ public class ChannelMemberBungeeConsole extends ChannelMemberBungee {
 
     /**
      * BungeeのProxiedPlayerを取得する
-     *
      * @return 常にnullが返される
      * @see com.github.ucchyocean.lc3.member.ChannelMemberBungee#getPlayer()
      */
@@ -43,7 +40,6 @@ public class ChannelMemberBungeeConsole extends ChannelMemberBungee {
 
     /**
      * 発言者が今いるサーバーを取得する
-     *
      * @return 常にnullが返される
      * @see com.github.ucchyocean.lc3.member.ChannelMemberBungee#getServer()
      */
@@ -54,7 +50,6 @@ public class ChannelMemberBungeeConsole extends ChannelMemberBungee {
 
     /**
      * 発言者がオンラインかどうかを取得する
-     *
      * @return 常にtrueが返される
      * @see com.github.ucchyocean.lc3.member.ChannelMember#isOnline()
      */
@@ -65,7 +60,6 @@ public class ChannelMemberBungeeConsole extends ChannelMemberBungee {
 
     /**
      * 発言者名を取得する
-     *
      * @return 発言者名
      * @see com.github.ucchyocean.lc3.member.ChannelMember#getName()
      */
@@ -76,7 +70,6 @@ public class ChannelMemberBungeeConsole extends ChannelMemberBungee {
 
     /**
      * 発言者の表示名を取得する
-     *
      * @return 発言者の表示名
      * @see com.github.ucchyocean.lc3.member.ChannelMember#getDisplayName()
      */
@@ -87,7 +80,6 @@ public class ChannelMemberBungeeConsole extends ChannelMemberBungee {
 
     /**
      * プレフィックスを返す
-     *
      * @return 常に空文字列
      * @see com.github.ucchyocean.lc3.member.ChannelMember#getPrefix()
      */
@@ -98,7 +90,6 @@ public class ChannelMemberBungeeConsole extends ChannelMemberBungee {
 
     /**
      * サフィックスを返す
-     *
      * @return 常に空文字列
      * @see com.github.ucchyocean.lc3.member.ChannelMember#getSuffix()
      */
@@ -109,30 +100,27 @@ public class ChannelMemberBungeeConsole extends ChannelMemberBungee {
 
     /**
      * 発言者にメッセージを送信する
-     *
      * @param message メッセージ
      * @see com.github.ucchyocean.lc3.member.ChannelMember#sendMessage(java.lang.String)
      */
     @Override
     public void sendMessage(String message) {
-        if (message == null || message.isEmpty()) return;
+        if ( message == null || message.isEmpty() ) return;
         sender.sendMessage(TextComponent.fromLegacyText(message));
     }
 
     /**
      * メッセージを送る
-     *
      * @param message 送るメッセージ
      * @see com.github.ucchyocean.lc3.member.ChannelMember#sendMessage(net.md_5.bungee.api.chat.BaseComponent[])
      */
     public void sendMessage(BaseComponent[] message) {
-        if (message == null || message.length == 0) return;
+        if ( message == null || message.length == 0 ) return;
         sender.sendMessage(message);
     }
 
     /**
      * 指定されたパーミッションノードの権限を持っているかどうかを取得する
-     *
      * @param node パーミッションノード
      * @return 権限を持っているかどうか
      * @see com.github.ucchyocean.lc3.member.ChannelMember#hasPermission(java.lang.String)
@@ -144,7 +132,6 @@ public class ChannelMemberBungeeConsole extends ChannelMemberBungee {
 
     /**
      * 指定されたパーミッションノードが定義されているかどうかを取得する
-     *
      * @param node パーミッションノード
      * @return 定義を持っているかどうか
      * @see com.github.ucchyocean.lc3.member.ChannelMember#isPermissionSet(java.lang.String)
@@ -156,7 +143,6 @@ public class ChannelMemberBungeeConsole extends ChannelMemberBungee {
 
     /**
      * 指定されたメッセージの内容を発言する
-     *
      * @param message メッセージ
      * @see com.github.ucchyocean.lc3.member.ChannelMember#chat(java.lang.String)
      */
@@ -166,7 +152,6 @@ public class ChannelMemberBungeeConsole extends ChannelMemberBungee {
 
     /**
      * IDを返す
-     *
      * @return 名前をそのまま返す
      * @see com.github.ucchyocean.lc3.member.ChannelMember#toString()
      */

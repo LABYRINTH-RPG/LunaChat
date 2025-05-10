@@ -5,15 +5,6 @@
  */
 package com.github.ucchyocean.lc3;
 
-import com.github.ucchyocean.lc3.bridge.BungeePermsBridge;
-import com.github.ucchyocean.lc3.bridge.LuckPermsBridge;
-import com.github.ucchyocean.lc3.bungee.*;
-import com.github.ucchyocean.lc3.channel.ChannelManager;
-import net.md_5.bungee.api.ProxyServer;
-import net.md_5.bungee.api.connection.ProxiedPlayer;
-import net.md_5.bungee.api.plugin.Plugin;
-import org.bstats.bungeecord.Metrics;
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,9 +13,24 @@ import java.util.TreeSet;
 import java.util.concurrent.Callable;
 import java.util.logging.Level;
 
+import org.bstats.bungeecord.Metrics;
+
+import com.github.ucchyocean.lc3.bridge.BungeePermsBridge;
+import com.github.ucchyocean.lc3.bridge.LuckPermsBridge;
+import com.github.ucchyocean.lc3.bungee.BungeeEventListener;
+import com.github.ucchyocean.lc3.bungee.BungeeEventSender;
+import com.github.ucchyocean.lc3.bungee.JapanizeCommandBungee;
+import com.github.ucchyocean.lc3.bungee.LunaChatCommandBungee;
+import com.github.ucchyocean.lc3.bungee.MessageCommandBungee;
+import com.github.ucchyocean.lc3.bungee.ReplyCommandBungee;
+import com.github.ucchyocean.lc3.channel.ChannelManager;
+
+import net.md_5.bungee.api.ProxyServer;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.plugin.Plugin;
+
 /**
  * LunaChatのBungeeCord実装
- *
  * @author ucchy
  */
 public class LunaChatBungee extends Plugin implements PluginInterface {
@@ -41,20 +47,7 @@ public class LunaChatBungee extends Plugin implements PluginInterface {
     private LuckPermsBridge luckperms;
 
     /**
-     * LunaChatのインスタンスを返す
-     *
-     * @return LunaChat
-     */
-    public static LunaChatBungee getInstance() {
-        if (instance == null) {
-            instance = (LunaChatBungee) ProxyServer.getInstance().getPluginManager().getPlugin("LunaChat");
-        }
-        return instance;
-    }
-
-    /**
      * プラグインが有効化されたときに呼び出されるメソッド
-     *
      * @see net.md_5.bungee.api.plugin.Plugin#onEnable()
      */
     @Override
@@ -86,19 +79,19 @@ public class LunaChatBungee extends Plugin implements PluginInterface {
         normalChatLogger = new LunaChatLogger("==normalchat");
 
         // チャンネルチャット無効なら、デフォルト発言先をクリアする
-        if (!config.isEnableChannelChat()) {
+        if ( !config.isEnableChannelChat() ) {
             manager.removeAllDefaultChannels();
         }
 
         // BungeePermsのロード
         Plugin temp = getProxy().getPluginManager().getPlugin("BungeePerms");
-        if (temp != null) {
+        if ( temp != null ) {
             bungeeperms = BungeePermsBridge.load(temp);
         }
 
         // LuckPermsのロード
         temp = getProxy().getPluginManager().getPlugin("LuckPerms");
-        if (temp != null) {
+        if ( temp != null ) {
             luckperms = LuckPermsBridge.load(temp);
         }
 
@@ -123,8 +116,18 @@ public class LunaChatBungee extends Plugin implements PluginInterface {
     }
 
     /**
+     * LunaChatのインスタンスを返す
+     * @return LunaChat
+     */
+    public static LunaChatBungee getInstance() {
+        if ( instance == null ) {
+            instance = (LunaChatBungee)ProxyServer.getInstance().getPluginManager().getPlugin("LunaChat");
+        }
+        return instance;
+    }
+
+    /**
      * コンフィグを返す
-     *
      * @return コンフィグ
      */
     public LunaChatConfig getConfig() {
@@ -133,9 +136,8 @@ public class LunaChatBungee extends Plugin implements PluginInterface {
 
     /**
      * プライベートメッセージの受信履歴を記録する
-     *
      * @param reciever 受信者
-     * @param sender   送信者
+     * @param sender 送信者
      */
     protected void putHistory(String reciever, String sender) {
         history.put(reciever, sender);
@@ -143,7 +145,6 @@ public class LunaChatBungee extends Plugin implements PluginInterface {
 
     /**
      * プライベートメッセージの受信履歴を取得する
-     *
      * @param reciever 受信者
      * @return 送信者
      */
@@ -153,7 +154,6 @@ public class LunaChatBungee extends Plugin implements PluginInterface {
 
     /**
      * このプラグインのJarファイル自身を示すFileクラスを返す。
-     *
      * @return Jarファイル
      * @see com.github.ucchyocean.lc3.PluginInterface#getPluginJarFile()
      */
@@ -164,7 +164,6 @@ public class LunaChatBungee extends Plugin implements PluginInterface {
 
     /**
      * LunaChatConfigを取得する
-     *
      * @return LunaChatConfig
      * @see com.github.ucchyocean.lc3.PluginInterface#getLunaChatConfig()
      */
@@ -175,7 +174,6 @@ public class LunaChatBungee extends Plugin implements PluginInterface {
 
     /**
      * LunaChatAPIを取得する
-     *
      * @return LunaChatAPI
      * @see com.github.ucchyocean.lc3.PluginInterface#getLunaChatAPI()
      */
@@ -186,7 +184,6 @@ public class LunaChatBungee extends Plugin implements PluginInterface {
 
     /**
      * 通常チャット用のロガーを返す
-     *
      * @return normalChatLogger
      */
     @Override
@@ -196,13 +193,12 @@ public class LunaChatBungee extends Plugin implements PluginInterface {
 
     /**
      * オンラインのプレイヤー名一覧を取得する
-     *
      * @return オンラインのプレイヤー名一覧
      */
     @Override
     public Set<String> getOnlinePlayerNames() {
         Set<String> list = new TreeSet<>();
-        for (ProxiedPlayer p : ProxyServer.getInstance().getPlayers()) {
+        for ( ProxiedPlayer p : ProxyServer.getInstance().getPlayers() ) {
             list.add(p.getName());
         }
         return list;
@@ -210,9 +206,8 @@ public class LunaChatBungee extends Plugin implements PluginInterface {
 
     /**
      * このプラグインのログを記録する
-     *
      * @param level ログレベル
-     * @param msg   ログメッセージ
+     * @param msg ログメッセージ
      */
     @Override
     public void log(Level level, String msg) {
@@ -221,7 +216,6 @@ public class LunaChatBungee extends Plugin implements PluginInterface {
 
     /**
      * UUIDキャッシュデータを取得する
-     *
      * @return UUIDキャッシュデータ
      * @see com.github.ucchyocean.lc3.PluginInterface#getUUIDCacheData()
      */
@@ -232,7 +226,6 @@ public class LunaChatBungee extends Plugin implements PluginInterface {
 
     /**
      * 非同期タスクを実行する
-     *
      * @param task タスク
      * @see com.github.ucchyocean.lc3.PluginInterface#runAsyncTask(java.lang.Runnable)
      */
@@ -243,7 +236,6 @@ public class LunaChatBungee extends Plugin implements PluginInterface {
 
     /**
      * BungeePerms連携クラスを取得する
-     *
      * @return BungeePerms連携クラス
      */
     public BungeePermsBridge getBungeePerms() {
@@ -252,7 +244,6 @@ public class LunaChatBungee extends Plugin implements PluginInterface {
 
     /**
      * LuckPerms連携クラスを取得する
-     *
      * @return LuckPerms連携クラス
      */
     public LuckPermsBridge getLuckPerms() {

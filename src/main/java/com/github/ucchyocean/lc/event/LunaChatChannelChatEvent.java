@@ -9,20 +9,19 @@ import com.github.ucchyocean.lc.channel.ChannelPlayer;
 
 /**
  * チャンネルチャットのチャットイベント
- *
  * @author ucchy
  * @deprecated Legacy Version
  */
 public class LunaChatChannelChatEvent extends LunaChatBaseCancellableEvent {
 
-    private final ChannelPlayer player;
-    private final String originalMessage;
+    private ChannelPlayer player;
+    private String originalMessage;
     private String ngMaskedMessage;
     private String messageFormat;
 
     public LunaChatChannelChatEvent(String channelName, ChannelPlayer player,
-                                    String originalMessage, String ngMaskedMessage,
-                                    String messageFormat) {
+            String originalMessage, String ngMaskedMessage,
+            String messageFormat) {
         super(channelName);
         this.player = player;
         this.originalMessage = originalMessage;
@@ -32,7 +31,6 @@ public class LunaChatChannelChatEvent extends LunaChatBaseCancellableEvent {
 
     /**
      * 発言を行ったプレイヤーを取得します。
-     *
      * @return 発言したプレイヤー
      */
     public ChannelPlayer getPlayer() {
@@ -41,7 +39,6 @@ public class LunaChatChannelChatEvent extends LunaChatBaseCancellableEvent {
 
     /**
      * 置き換え前の、発言されたままのテキストをかえす
-     *
      * @return 発言内容
      */
     public String getPreReplaceMessage() {
@@ -50,7 +47,6 @@ public class LunaChatChannelChatEvent extends LunaChatBaseCancellableEvent {
 
     /**
      * NGワードがマスクされた後のテキストをかえす
-     *
      * @return NGワードマスク済みの発言内容
      */
     public String getNgMaskedMessage() {
@@ -58,17 +54,7 @@ public class LunaChatChannelChatEvent extends LunaChatBaseCancellableEvent {
     }
 
     /**
-     * NGワードマスク後のテキストを上書き設定する
-     *
-     * @param ngMaskedMessage 上書きする発言内容
-     */
-    public void setNgMaskedMessage(String ngMaskedMessage) {
-        this.ngMaskedMessage = ngMaskedMessage;
-    }
-
-    /**
      * メッセージに適用されるフォーマットをかえす
-     *
      * @return フォーマット
      */
     public String getMessageFormat() {
@@ -76,8 +62,15 @@ public class LunaChatChannelChatEvent extends LunaChatBaseCancellableEvent {
     }
 
     /**
+     * NGワードマスク後のテキストを上書き設定する
+     * @param ngMaskedMessage 上書きする発言内容
+     */
+    public void setNgMaskedMessage(String ngMaskedMessage) {
+        this.ngMaskedMessage = ngMaskedMessage;
+    }
+
+    /**
      * メッセージフォーマットを上書き設定する
-     *
      * @param messageFormat フォーマット
      */
     public void setMessageFormat(String messageFormat) {

@@ -5,23 +5,22 @@
  */
 package com.github.ucchyocean.lc3.bungee.event;
 
-import com.github.ucchyocean.lc3.member.ChannelMember;
-
 import java.util.HashMap;
 import java.util.Map;
 
+import com.github.ucchyocean.lc3.member.ChannelMember;
+
 /**
  * オプション変更イベント
- *
  * @author ucchy
  */
 public class LunaChatBungeeChannelOptionChangedEvent extends LunaChatBungeeBaseCancellableEvent {
 
-    private final ChannelMember member;
+    private ChannelMember member;
     private Map<String, String> options;
 
     public LunaChatBungeeChannelOptionChangedEvent(String channelName,
-                                                   ChannelMember member, Map<String, String> options) {
+            ChannelMember member, Map<String, String> options) {
         super(channelName);
         this.member = member;
         this.options = options;
@@ -29,7 +28,6 @@ public class LunaChatBungeeChannelOptionChangedEvent extends LunaChatBungeeBaseC
 
     /**
      * 変更後のオプションリストをかえす
-     *
      * @return オプションリスト
      */
     public Map<String, String> getOptions() {
@@ -38,7 +36,6 @@ public class LunaChatBungeeChannelOptionChangedEvent extends LunaChatBungeeBaseC
 
     /**
      * オプションリストを上書き設定する
-     *
      * @param options オプションリスト
      */
     public void setOptions(HashMap<String, String> options) {
@@ -47,7 +44,6 @@ public class LunaChatBungeeChannelOptionChangedEvent extends LunaChatBungeeBaseC
 
     /**
      * チャンネルのオプションを変更した人を取得する。
-     *
      * @return チャンネルのオプションを変更したChannelMember
      */
     public ChannelMember getMember() {

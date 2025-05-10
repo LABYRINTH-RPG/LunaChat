@@ -11,7 +11,6 @@ import com.github.ucchyocean.lc3.member.ChannelMember;
 
 /**
  * acceptコマンドの実行クラス
- *
  * @author ucchy
  */
 public class AcceptCommand extends LunaChatSubCommand {
@@ -21,7 +20,6 @@ public class AcceptCommand extends LunaChatSubCommand {
 
     /**
      * コマンドを取得します。
-     *
      * @return コマンド
      * @see com.github.ucchyocean.lc3.command.LunaChatSubCommand#getCommandName()
      */
@@ -32,7 +30,6 @@ public class AcceptCommand extends LunaChatSubCommand {
 
     /**
      * パーミッションノードを取得します。
-     *
      * @return パーミッションノード
      * @see com.github.ucchyocean.lc3.command.LunaChatSubCommand#getPermissionNode()
      */
@@ -43,7 +40,6 @@ public class AcceptCommand extends LunaChatSubCommand {
 
     /**
      * コマンドの種別を取得します。
-     *
      * @return コマンド種別
      * @see com.github.ucchyocean.lc3.command.LunaChatSubCommand#getCommandType()
      */
@@ -54,9 +50,8 @@ public class AcceptCommand extends LunaChatSubCommand {
 
     /**
      * 使用方法に関するメッセージをsenderに送信します。
-     *
      * @param sender コマンド実行者
-     * @param label  実行ラベル
+     * @param label 実行ラベル
      * @see com.github.ucchyocean.lc3.command.LunaChatSubCommand#sendUsageMessage()
      */
     @Override
@@ -67,10 +62,9 @@ public class AcceptCommand extends LunaChatSubCommand {
 
     /**
      * コマンドを実行します。
-     *
      * @param sender コマンド実行者
-     * @param label  実行ラベル
-     * @param args   実行時の引数
+     * @param label 実行ラベル
+     * @param args 実行時の引数
      * @return コマンドが実行されたかどうか
      * @see com.github.ucchyocean.lc3.command.LunaChatSubCommand#runCommand(java.lang.String[])
      */
@@ -87,7 +81,7 @@ public class AcceptCommand extends LunaChatSubCommand {
         String channelName = DataMaps.inviteMap.get(sender.getName());
 
         // 取得できなかったらエラー終了する
-        if (channelName == null) {
+        if ( channelName == null ) {
             sender.sendMessage(Messages.errmsgNotfoundChannel());
             return true;
         }

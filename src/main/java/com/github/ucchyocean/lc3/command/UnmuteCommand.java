@@ -11,7 +11,6 @@ import com.github.ucchyocean.lc3.member.ChannelMember;
 
 /**
  * unmuteコマンドの実行クラス
- *
  * @author ucchy
  */
 public class UnmuteCommand extends LunaChatSubCommand {
@@ -21,7 +20,6 @@ public class UnmuteCommand extends LunaChatSubCommand {
 
     /**
      * コマンドを取得します。
-     *
      * @return コマンド
      * @see com.github.ucchyocean.lc3.command.LunaChatSubCommand#getCommandName()
      */
@@ -32,7 +30,6 @@ public class UnmuteCommand extends LunaChatSubCommand {
 
     /**
      * パーミッションノードを取得します。
-     *
      * @return パーミッションノード
      * @see com.github.ucchyocean.lc3.command.LunaChatSubCommand#getPermissionNode()
      */
@@ -43,7 +40,6 @@ public class UnmuteCommand extends LunaChatSubCommand {
 
     /**
      * コマンドの種別を取得します。
-     *
      * @return コマンド種別
      * @see com.github.ucchyocean.lc3.command.LunaChatSubCommand#getCommandType()
      */
@@ -54,9 +50,8 @@ public class UnmuteCommand extends LunaChatSubCommand {
 
     /**
      * 使用方法に関するメッセージをsenderに送信します。
-     *
      * @param sender コマンド実行者
-     * @param label  実行ラベル
+     * @param label 実行ラベル
      * @see com.github.ucchyocean.lc3.command.LunaChatSubCommand#sendUsageMessage()
      */
     @Override
@@ -67,10 +62,9 @@ public class UnmuteCommand extends LunaChatSubCommand {
 
     /**
      * コマンドを実行します。
-     *
      * @param sender コマンド実行者
-     * @param label  実行ラベル
-     * @param args   実行時の引数
+     * @param label 実行ラベル
+     * @param args 実行時の引数
      * @return コマンドが実行されたかどうか
      * @see com.github.ucchyocean.lc3.command.LunaChatSubCommand#runCommand(java.lang.String[])
      */
@@ -100,7 +94,7 @@ public class UnmuteCommand extends LunaChatSubCommand {
         }
 
         // モデレーターかどうか確認する
-        if (!channel.hasModeratorPermission(sender)) {
+        if ( !channel.hasModeratorPermission(sender) ) {
             sender.sendMessage(Messages.errmsgNotModerator());
             return true;
         }
@@ -114,7 +108,9 @@ public class UnmuteCommand extends LunaChatSubCommand {
 
         // Mute解除実行
         channel.getMuted().remove(kicked);
-        channel.getMuteExpires().remove(kicked);
+        if ( channel.getMuteExpires().containsKey(kicked) ) {
+            channel.getMuteExpires().remove(kicked);
+        }
         channel.save();
 
         // senderに通知メッセージを出す
@@ -122,11 +118,11 @@ public class UnmuteCommand extends LunaChatSubCommand {
 
         // チャンネルに通知メッセージを出す
         channel.sendSystemMessage(Messages.unmuteMessage(
-                        channel.getColorCode(), channel.getName(), kicked.getName()),
+                channel.getColorCode(), channel.getName(), kicked.getName()),
                 true, "system");
 
         // BANされていた人に通知メッセージを出す
-        if (kicked != null && kicked.isOnline()) {
+        if ( kicked != null && kicked.isOnline() ) {
             kicked.sendMessage(Messages.cmdmsgUnmuted(channel.getName()));
         }
 

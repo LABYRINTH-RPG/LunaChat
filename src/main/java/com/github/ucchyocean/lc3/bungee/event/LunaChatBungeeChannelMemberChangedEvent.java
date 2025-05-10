@@ -5,26 +5,24 @@
  */
 package com.github.ucchyocean.lc3.bungee.event;
 
-import com.github.ucchyocean.lc3.member.ChannelMember;
-
 import java.util.List;
+
+import com.github.ucchyocean.lc3.member.ChannelMember;
 
 /**
  * メンバー変更イベント
- *
  * @author ucchy
  */
 public class LunaChatBungeeChannelMemberChangedEvent extends LunaChatBungeeBaseCancellableEvent {
 
-    private final List<ChannelMember> before;
-    private final List<ChannelMember> after;
+    private List<ChannelMember> before;
+    private List<ChannelMember> after;
 
     /**
      * コンストラクタ
-     *
      * @param channelName チャンネル名
-     * @param before      変更前のメンバー
-     * @param after       変更後のメンバー
+     * @param before 変更前のメンバー
+     * @param after 変更後のメンバー
      */
     public LunaChatBungeeChannelMemberChangedEvent(
             String channelName, List<ChannelMember> before, List<ChannelMember> after) {
@@ -35,7 +33,6 @@ public class LunaChatBungeeChannelMemberChangedEvent extends LunaChatBungeeBaseC
 
     /**
      * 変更前のメンバーリストをかえす
-     *
      * @return
      */
     public List<ChannelMember> getMembersBefore() {
@@ -44,7 +41,6 @@ public class LunaChatBungeeChannelMemberChangedEvent extends LunaChatBungeeBaseC
 
     /**
      * 変更後のメンバーリストをかえす
-     *
      * @return
      */
     public List<ChannelMember> getMembersAfter() {

@@ -12,7 +12,6 @@ import org.bukkit.entity.Player;
 
 /**
  * コマンドブロック
- *
  * @author ucchy
  * @deprecated Legacy Version
  */
@@ -22,7 +21,6 @@ public class ChannelPlayerBlock extends ChannelPlayer {
 
     /**
      * コンストラクタ
-     *
      * @param sender コマンドブロック
      */
     public ChannelPlayerBlock(BlockCommandSender sender) {
@@ -31,7 +29,6 @@ public class ChannelPlayerBlock extends ChannelPlayer {
 
     /**
      * オンラインかどうか
-     *
      * @return 常にtrue
      * @see com.github.ucchyocean.lc.channel.ChannelPlayer#isOnline()
      */
@@ -42,7 +39,6 @@ public class ChannelPlayerBlock extends ChannelPlayer {
 
     /**
      * プレイヤー名を返す
-     *
      * @return プレイヤー名
      * @see com.github.ucchyocean.lc.channel.ChannelPlayer#getName()
      */
@@ -53,7 +49,6 @@ public class ChannelPlayerBlock extends ChannelPlayer {
 
     /**
      * プレイヤー表示名を返す
-     *
      * @return プレイヤー表示名
      * @see com.github.ucchyocean.lc.channel.ChannelPlayer#getDisplayName()
      */
@@ -64,7 +59,6 @@ public class ChannelPlayerBlock extends ChannelPlayer {
 
     /**
      * プレフィックスを返す
-     *
      * @return 常に空文字列
      * @see com.github.ucchyocean.lc.channel.ChannelPlayer#getPrefix()
      */
@@ -75,7 +69,6 @@ public class ChannelPlayerBlock extends ChannelPlayer {
 
     /**
      * サフィックスを返す
-     *
      * @return 常に空文字列
      * @see com.github.ucchyocean.lc.channel.ChannelPlayer#getSuffix()
      */
@@ -86,7 +79,6 @@ public class ChannelPlayerBlock extends ChannelPlayer {
 
     /**
      * メッセージを送る、実際は何もせずにメッセージを捨てる
-     *
      * @param message
      * @see com.github.ucchyocean.lc.channel.ChannelPlayer#sendMessage(java.lang.String)
      */
@@ -97,7 +89,6 @@ public class ChannelPlayerBlock extends ChannelPlayer {
 
     /**
      * BukkitのPlayerを取得する
-     *
      * @return 常にnullが返される
      * @see com.github.ucchyocean.lc.channel.ChannelPlayer#getPlayer()
      */
@@ -108,7 +99,6 @@ public class ChannelPlayerBlock extends ChannelPlayer {
 
     /**
      * 発言者が今いるワールドのワールド名を取得する
-     *
      * @return 常に "-" が返される。
      * @see com.github.ucchyocean.lc.channel.ChannelPlayer#getWorldName()
      */
@@ -119,13 +109,12 @@ public class ChannelPlayerBlock extends ChannelPlayer {
 
     /**
      * 発言者が今いる位置を取得する
-     *
      * @return 発言者の位置
      * @see com.github.ucchyocean.lc.channel.ChannelPlayer#getLocation()
      */
     @Override
     public Location getLocation() {
-        if (sender != null) {
+        if ( sender != null ) {
             return sender.getBlock().getLocation();
         }
         return null;
@@ -133,7 +122,6 @@ public class ChannelPlayerBlock extends ChannelPlayer {
 
     /**
      * 指定されたパーミッションノードの権限を持っているかどうかを取得する
-     *
      * @param node パーミッションノード
      * @return 権限を持っているかどうか
      * @see com.github.ucchyocean.lc.channel.ChannelPlayer#hasPermission(java.lang.String)
@@ -145,7 +133,6 @@ public class ChannelPlayerBlock extends ChannelPlayer {
 
     /**
      * 指定されたパーミッションノードが定義されているかどうかを取得する
-     *
      * @param node パーミッションノード
      * @return 定義を持っているかどうか
      * @see com.github.ucchyocean.lc.channel.ChannelPlayer#isPermissionSet(java.lang.String)
@@ -157,7 +144,6 @@ public class ChannelPlayerBlock extends ChannelPlayer {
 
     /**
      * 指定されたCommandSenderと同一かどうかを返す
-     *
      * @param sender
      * @return 同一かどうか
      * @see com.github.ucchyocean.lc.channel.ChannelPlayer#equals(org.bukkit.entity.Player)
@@ -169,7 +155,6 @@ public class ChannelPlayerBlock extends ChannelPlayer {
 
     /**
      * IDを返す
-     *
      * @return 名前をそのまま返す
      * @see com.github.ucchyocean.lc.channel.ChannelPlayer#getID()
      */

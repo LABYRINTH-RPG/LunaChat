@@ -11,72 +11,62 @@ import java.util.logging.Level;
 
 /**
  * プラグインインターフェイス
- *
  * @author ucchy
  */
 public interface PluginInterface {
 
     /**
      * このプラグインのJarファイル自身を示すFileクラスを返す。
-     *
      * @return Jarファイル
      */
-    File getPluginJarFile();
+    public File getPluginJarFile();
 
     /**
      * LunaChatConfigを取得する
-     *
      * @return LunaChatConfig
      */
-    LunaChatConfig getLunaChatConfig();
+    public LunaChatConfig getLunaChatConfig();
 
     /**
      * LunaChatAPIを取得する
-     *
      * @return LunaChatAPI
      */
-    LunaChatAPI getLunaChatAPI();
+    public LunaChatAPI getLunaChatAPI();
 
     /**
      * プラグインのデータ格納フォルダを取得する
-     *
      * @return データ格納フォルダ
      */
-    File getDataFolder();
+    public File getDataFolder();
 
     /**
      * 通常チャット用のロガーを返す
-     *
      * @return normalChatLogger
      */
-    LunaChatLogger getNormalChatLogger();
+    public LunaChatLogger getNormalChatLogger();
 
     /**
      * オンラインのプレイヤー名一覧を取得する
-     *
      * @return オンラインのプレイヤー名一覧
      */
-    Set<String> getOnlinePlayerNames();
+    public Set<String> getOnlinePlayerNames();
 
     /**
      * このプラグインのログを記録する
-     *
      * @param level ログレベル
-     * @param msg   ログメッセージ
+     * @param msg ログメッセージ
      */
-    void log(Level level, String msg);
+    public void log(Level level, String msg);
 
     /**
      * UUIDキャッシュデータを取得する
-     *
      * @return UUIDキャッシュデータ
      */
-    UUIDCacheData getUUIDCacheData();
+    public UUIDCacheData getUUIDCacheData();
 
     /**
      * 非同期タスクを実行する
-     *
      * @param task タスク
      */
-    void runAsyncTask(Runnable task);
+    public void runAsyncTask(Runnable task);
 }

@@ -10,12 +10,11 @@ import com.github.ucchyocean.lc3.member.ChannelMember;
 
 /**
  * チャンネル作成イベント
- *
  * @author ucchy
  */
 public class LunaChatBungeeChannelCreateEvent extends LunaChatBungeeBaseCancellableEvent {
 
-    private final ChannelMember member;
+    private ChannelMember member;
 
     public LunaChatBungeeChannelCreateEvent(String channelName, ChannelMember member) {
         super(channelName);
@@ -24,7 +23,6 @@ public class LunaChatBungeeChannelCreateEvent extends LunaChatBungeeBaseCancella
 
     /**
      * 作成するチャンネルのチャンネル名を上書き設定する
-     *
      * @param channelName 設定するチャンネル名
      */
     public void setChannelName(String channelName) {
@@ -33,7 +31,6 @@ public class LunaChatBungeeChannelCreateEvent extends LunaChatBungeeBaseCancella
 
     /**
      * チャンネルを作成した人を取得する。
-     *
      * @return チャンネルを作成したChannelMember
      */
     public ChannelMember getMember() {
@@ -41,9 +38,9 @@ public class LunaChatBungeeChannelCreateEvent extends LunaChatBungeeBaseCancella
     }
 
     /**
-     * @see com.github.ucchyocean.lc3.bukkit.event.LunaChatBukkitBaseEvent#getChannel()
      * @deprecated チャンネル作成イベントは、チャンネルを作成する前に呼び出されるので、
      * このメソッドの戻り値は必ずnullになります。
+     * @see com.github.ucchyocean.lc3.bukkit.event.LunaChatBukkitBaseEvent#getChannel()
      */
     @Override
     public Channel getChannel() {
